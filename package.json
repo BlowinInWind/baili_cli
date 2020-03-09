@@ -1,0 +1,33 @@
+{
+    "name": "baili_cli",
+    "version": "1.0.0",
+    "description": "前端cli",
+    "main": "index.js",
+    "scripts": {
+        "start": "babel-node src/index.js --plugins @babel/plugin-transform-modules-commonjs",
+        "build": "babel src -d dist"
+    },
+    "keywords": [
+        "cli"
+    ],
+    "bin": {
+        "baili": "./bin/front_cli"
+    },
+    "dependencies": {
+        "@babel/cli": "^7.8.4",
+        "@babel/preset-env": "^7.6.3",
+        "chalk": "^3.0.0",
+        "commander": "^4.1.1",
+        "download-git-repo": "^3.0.2",
+        "inquirer": "^7.0.6",
+        "log-symbols": "^3.0.0",
+        "ora": "^4.0.3",
+        "@babel/core": "^7.8.7",
+        "which": "2.0.2",
+        "@babel/plugin-transform-modules-commonjs": "^7.8.3",
+        "@babel/register": "^7.8.6",
+        "@babel/node": "7.8.7"
+    },
+    "author": "jiangtong",
+    "license": "ISC"
+}
