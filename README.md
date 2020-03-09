@@ -2,4 +2,4 @@
 
 npm i baili_cli -g
 
-baili_cli init
+baili init
