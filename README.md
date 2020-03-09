@@ -1,5 +1,5 @@
 # baili_cli
 
-npm i baili_cli -g
+npm i blowin_cli -g
 
-baili init
+blowin init
