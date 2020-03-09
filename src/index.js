@@ -99,31 +99,31 @@ program
     });
 
 //配置下载的模板
-program
-    .command('config')
-    .alias('c')
-    .description('自己配置下载模板等')
-    .action(action => {
-        let argvs = [...process.argv.slice(3)];
-        if (argvs[0] == 'remove') {
-            remove(...process.argv.slice(3));
-        } else {
-            add(...process.argv.slice(3));
-        }
+// program
+//     .command('config')
+//     .alias('c')
+//     .description('自己配置下载模板等')
+//     .action(action => {
+//         let argvs = [...process.argv.slice(3)];
+//         if (argvs[0] == 'remove') {
+//             remove(...process.argv.slice(3));
+//         } else {
+//             add(...process.argv.slice(3));
+//         }
 
-        // console.log(...process.argv.slice(3));
-    });
+//         // console.log(...process.argv.slice(3));
+//     });
 
 program.usage('<command> [options]');
 
-function help() {
-    console.log('\r\nUsage:');
-    console.log('config add <key> <value>');
-    console.log('config remove <key>');
-    console.log('\r');
-}
-program.on('-h', help);
-program.on('--help', help);
+// function help() {
+//     console.log('\r\nUsage:');
+//     console.log('config add <key> <value>');
+//     console.log('config remove <key>');
+//     console.log('\r');
+// }
+// program.on('-h', help);
+// program.on('--help', help);
 
 const cmd = process.argv[2];
 if (!['i', 'init', 'c', 'config'].includes(cmd)) {

@@ -1,6 +1,6 @@
 {
-    "name": "baili_cli",
-    "version": "1.0.0",
+    "name": "blowin_cli",
+    "version": "1.0.1",
     "description": "前端cli",
     "main": "index.js",
     "scripts": {
@@ -11,7 +11,7 @@
         "cli"
     ],
     "bin": {
-        "baili": "./bin/front_cli"
+        "blowin": "./bin/front_cli"
     },
     "dependencies": {
         "@babel/cli": "^7.8.4",
@@ -27,6 +27,10 @@
         "@babel/plugin-transform-modules-commonjs": "^7.8.3",
         "@babel/register": "^7.8.6",
         "@babel/node": "7.8.7"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jiangtong/baili_cli"
     },
     "author": "jiangtong",
     "license": "ISC"
