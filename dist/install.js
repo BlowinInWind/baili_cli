@@ -13,8 +13,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function runCmd({
   cmd,
-  success,
   cwd,
+  success,
   params
 }) {
   params = params || [];

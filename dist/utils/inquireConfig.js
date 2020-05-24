@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+/** @format */
 var _default = [{
   type: 'input',
   name: 'name',
@@ -29,8 +31,11 @@ var _default = [{
     name: '完整的一个模板',
     value: 'frontTemplate'
   }, {
-    name: '空的工程',
-    value: 'baiLi'
+    name: 'js、react初始工程',
+    value: 'init_js'
+  }, {
+    name: 'ts、react初始工程',
+    value: 'init_ts'
   }]
 }];
 exports.default = _default;

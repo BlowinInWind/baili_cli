@@ -1,3 +1,5 @@
+/** @format */
+
 import commander from 'commander';
 import packageJson from '../package.json';
 let program = new commander.Command();
@@ -10,7 +12,12 @@ import fs from 'fs';
 import { resolveApp, message } from './utils/index';
 import install from './install';
 import inquireConfig, { add, remove } from './utils/inquireConfig';
+import createModule from './create/module';
+
 program.version(packageJson.version).name(packageJson.name);
+
+// import path from 'path';
+// const cacheFileName = path.resolve(__dirname, './utils/template.json');
 
 // 新建项目
 program
@@ -33,7 +40,7 @@ program
                             fs.readFile(
                                 `${resolveApp(params.name)}/package.json`,
                                 'utf8',
-                                function(err, data) {
+                                function (err, data) {
                                     // 获取package.json文件
                                     const createPackageJson = JSON.parse(data);
                                     createPackageJson.name = params.name;
@@ -51,7 +58,7 @@ program
                                         )}/package.json`,
                                         updatePackageJson,
                                         'utf8',
-                                        function(err) {
+                                        function (err) {
                                             if (err) {
                                                 console.error(err);
                                                 return;
@@ -98,6 +105,14 @@ program
         });
     });
 
+program
+    .command('create')
+    .alias('c')
+    .description('创建一个新模块')
+    .action(() => {
+        new createModule().cr();
+    });
+
 //配置下载的模板
 // program
 //     .command('config')
@@ -116,18 +131,18 @@ program
 
 program.usage('<command> [options]');
 
-// function help() {
-//     console.log('\r\nUsage:');
-//     console.log('config add <key> <value>');
-//     console.log('config remove <key>');
-//     console.log('\r');
-// }
-// program.on('-h', help);
-// program.on('--help', help);
-
-const cmd = process.argv[2];
-if (!['i', 'init', 'c', 'config'].includes(cmd)) {
-    program.help();
+function help() {
+    console.log('\r\nUsage:');
+    console.log('config add <key> <value>');
+    console.log('config remove <key>');
+    console.log('\r');
 }
+program.on('-h', help);
+program.on('--help', help);
+
+// const cmd = process.argv[2];
+// if (!['i', 'init', 'c', 'config'].includes(cmd)) {
+//     program.help();
+// }
 
 program.parse(process.argv);

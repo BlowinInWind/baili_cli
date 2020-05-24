@@ -1,7 +1,7 @@
 import which from 'which';
 import { spawn } from 'child_process';
 
-function runCmd({ cmd, success, cwd, params }) {
+function runCmd({ cmd, cwd, success, params }) {
     params = params || [];
     const runner = spawn(cmd, params, {
         cwd,

@@ -1,3 +1,5 @@
+/** @format */
+
 export default [
     {
         type: 'input',
@@ -7,7 +9,7 @@ export default [
         filter(val) {
             return val.trim();
         },
-        validate: function(val) {
+        validate: function (val) {
             if (val.length > 0) {
                 return true;
             }
@@ -24,8 +26,12 @@ export default [
                 value: 'frontTemplate'
             },
             {
-                name: '空的工程',
-                value: 'baiLi'
+                name: 'js、react初始工程',
+                value: 'init_js'
+            },
+            {
+                name: 'ts、react初始工程',
+                value: 'init_ts'
             }
         ]
     }
