@@ -45,5 +45,8 @@
         "url": "https://github.com/jiangtong/baili_cli"
     },
     "author": "jiangtong",
-    "license": "ISC"
+    "license": "ISC",
+    "devDependencies": {
+        "@types/jscodeshift": "^0.11.2"
+    }
 }
