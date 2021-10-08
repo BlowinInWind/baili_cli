@@ -28,9 +28,9 @@ const renderRoutes = (routes: RouterConfig[]) => {
                                         return <Redirect to="/login"></Redirect>;
                                     }
                                 }
-                                return route.routes && route.routes.length > 0 ? (
+                                return route.children && route.children.length > 0 ? (
                                     <route.component {...props}>
-                                        <Switch>{renderRoutes(route.routes)}</Switch>
+                                        <Switch>{renderRoutes(route.children)}</Switch>
                                         {route.redirect && (
                                             <Redirect to={route.redirect}></Redirect>
                                         )}

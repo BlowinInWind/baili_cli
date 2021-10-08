@@ -1,20 +1,33 @@
+/* eslint-disable react/no-multi-comp */
 import React from 'react';
-import { RouteProps } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import asyncCom from './asyncCom';
 
 const NotFound = () => {
     return <div>NotFound</div>;
 };
 
-export interface RouterConfig extends RouteProps {
+export interface RouterConfig {
     auth?: boolean; // 登录验证
     key?: string;
-    name?: string; // 侧边栏名字
+    title?: React.ComponentType | React.ElementType | string; // 侧边栏名字
     path?: string; // 路径
     icon?: string; // icon
-    routes?: Array<RouterConfig>; // 子路由数组
+    exact?: boolean;
+    strict?: boolean;
+    meta?: {
+        title: string;
+        icon: string;
+    };
+    // breadcrumb?: React.ComponentType | React.ElementType | string; // breadcrumb侧边栏名字
+    // routes?: Array<RouterConfig>; // 子路由数组
+    children?: Array<RouterConfig>; // 子路由数组
     redirect?: string; // 重定向地址
     hideInMenu?: boolean; // 在菜单中隐藏路由 可以用于详情页配置
+    component?:
+        | React.ComponentType<RouteComponentProps<any>>
+        | React.ComponentType<any>
+        | string;
 }
 
 /**
@@ -24,26 +37,27 @@ export interface RouterConfig extends RouteProps {
  * @param {boolean} [redirectOrNotFound=true] true代表重定向 如果父路由没有redirect，可以用这个办法默认指向第一个
  * @return {*}  {RouterConfig}
  */
-const createPermissionRouter = (
+
+export const createPermissionRouter = (
     item: RouterConfig,
     redirectOrNotFound = true,
 ): RouterConfig => {
-    if (item.routes && item.routes.length > 0) {
+    if (item.children && item.children.length > 0) {
         if (redirectOrNotFound) {
             return {
                 ...item,
-                redirect: item.routes?.[0]?.path,
-                routes: item.routes.map(route =>
+                redirect: item.children?.[0]?.path,
+                children: item.children.map(route =>
                     createPermissionRouter(route, redirectOrNotFound),
                 ),
             };
         }
-        item.routes = [
-            ...item.routes,
+        item.children = [
+            ...item.children,
             {
                 path: '*',
                 hideInMenu: true,
-                component: <NotFound></NotFound>,
+                component: NotFound,
             },
         ];
         return item;
@@ -59,27 +73,27 @@ const routers: RouterConfig[] = [
     {
         path: '/404',
         hideInMenu: true,
-        component: <NotFound></NotFound>,
+        component: NotFound,
     },
     {
         path: '/login',
         hideInMenu: true,
-        component: <div>login</div>,
+        component: () => <div></div>,
     },
     {
         path: '/index',
-        component: <div></div>,
+        component: () => <div></div>,
         auth: true,
-        routes: [],
+        children: [],
     },
     {
         path: '/',
-        redirect: '/index/home',
+        redirect: '/index',
     },
     {
         path: '*',
         hideInMenu: true,
-        component: <NotFound></NotFound>,
+        component: NotFound,
     },
 ];
 
