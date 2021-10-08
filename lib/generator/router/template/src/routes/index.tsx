@@ -3,6 +3,14 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import routers, { RouterConfig } from './routerConfigs';
+<%_ if(historyMode) { _%>
+import { createBrowserHistory } from 'history';
+export const history = createBrowserHistory();
+<%_ } else { _%>
+import { createHashHistory } from 'history';
+export const history = createHashHistory();
+<%_ } _%>
+
 
 const renderRoutes = (routes: RouterConfig[]) => {
     return (
@@ -14,36 +22,25 @@ const renderRoutes = (routes: RouterConfig[]) => {
                             key={route.key || i}
                             exact={route.exact}
                             path={route.path}
-                            render={props => {
+                            render={(props) => {
                                 if (route.auth) {
                                     if (!localStorage.getItem('name')) {
-                                        return (
-                                            <Redirect to="/login"></Redirect>
-                                        );
+                                        return <Redirect to="/login"></Redirect>;
                                     }
                                 }
-                                return route.routes &&
-                                    route.routes.length > 0 ? (
+                                return route.routes && route.routes.length > 0 ? (
                                     <route.component {...props}>
-                                        <Switch>
-                                            {renderRoutes(route.routes)}
-                                        </Switch>
+                                        <Switch>{renderRoutes(route.routes)}</Switch>
                                         {route.redirect && (
-                                            <Redirect
-                                                to={route.redirect}
-                                            ></Redirect>
+                                            <Redirect to={route.redirect}></Redirect>
                                         )}
                                     </route.component>
                                 ) : (
                                     <>
                                         {route.redirect ? (
-                                            <Redirect
-                                                to={route.redirect}
-                                            ></Redirect>
+                                            <Redirect to={route.redirect}></Redirect>
                                         ) : (
-                                            <route.component
-                                                {...props}
-                                            ></route.component>
+                                            <route.component {...props}></route.component>
                                         )}
                                     </>
                                 );

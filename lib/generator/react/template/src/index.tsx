@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 const App = () => {
-    return <div>1</div>;
+    return <></>;
 };
 
-const render = Component => {
+const render = (Component) => {
     ReactDOM.render(Component, document.getElementById('app'));
 };
 
-const hotDev = module => {
+const hotDev = (module) => {
     if (process.env.NODE_ENV !== 'production' && module.hot) {
         module.hot.accept(() => {
             render(<App />);
