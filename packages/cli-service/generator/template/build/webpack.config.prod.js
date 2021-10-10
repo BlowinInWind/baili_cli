@@ -5,7 +5,9 @@ const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
+const config = require('./config');
 
 module.exports = merge(base, {
     mode: 'production',
@@ -21,10 +23,10 @@ module.exports = merge(base, {
     optimization: {
         usedExports: true,
         runtimeChunk: {
-            name: entrypoint => `runtime~${entrypoint.name}`,
+            name: (entrypoint) => `runtime~${entrypoint.name}`,
         },
         minimize: false,
-        chunkIds: isDev ? 'named' : 'deterministic',
+        chunkIds: 'deterministic',
         splitChunks: {
             chunks: 'async',
             minSize: 20000,

@@ -2,10 +2,12 @@
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const path = require('path');
-const devConfig = path.join(process.cwd(), 'build/webpack.config.dev.js');
-const prodConfig = path.join(process.cwd(), 'build/webpack.config.prod.js');
+const fs = require('fs');
+const devConfig = require(path.join(process.cwd(), 'build/webpack.config.dev.js'));
+const prodConfig = require(path.join(process.cwd(), 'build/webpack.config.prod.js'));
 
 const args = process.argv.slice(2);
+
 if (args[0] === 'start') {
     const compiler = webpack(devConfig);
     const server = new WebpackDevServer(compiler);

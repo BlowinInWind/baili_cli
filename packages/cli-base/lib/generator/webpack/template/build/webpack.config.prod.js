@@ -21,7 +21,7 @@ module.exports = merge(base, {
     optimization: {
         usedExports: true,
         runtimeChunk: {
-            name: entrypoint => `runtime~${entrypoint.name}`,
+            name: (entrypoint) => `runtime~${entrypoint.name}`,
         },
         minimize: false,
         chunkIds: isDev ? 'named' : 'deterministic',
