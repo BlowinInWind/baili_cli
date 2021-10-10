@@ -11,9 +11,9 @@
     "keywords": [
         "cli"
     ],
-    "bin": {
-        "qian_li": "./bin/index.js"
-    },
+    "workspaces": [
+        "packages/cli-*"
+    ],
     "dependencies": {
         "@babel/cli": "^7.8.4",
         "@babel/core": "^7.8.7",
@@ -47,6 +47,7 @@
     "author": "jiangtong",
     "license": "ISC",
     "devDependencies": {
-        "@types/jscodeshift": "^0.11.2"
+        "@types/jscodeshift": "^0.11.2",
+        "lerna": "^4.0.0"
     }
 }

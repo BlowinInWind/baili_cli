@@ -8,6 +8,7 @@ const clearConsole = require('./utils/clearConsole');
 const pkgJson = require('../package.json');
 const Generator = require('./Generator');
 const executeCommand = require('./utils/executeCommand');
+const writeFileTree = require('./utils/writeFileTree');
 
 const create = async (name) => {
     const targetDir = path.join(process.cwd(), name);
@@ -56,15 +57,38 @@ const create = async (name) => {
 
     const generator = new Generator(pkg, path.join(process.cwd(), name));
 
+    // 填入 cli-service 必选项，无需用户选择
     // 填入 react webpack 必选项，无需用户选择
-    answers.features.unshift('webpack', 'react', 'babel');
+    answers.features.unshift('react', 'babel', 'service');
+    // answers.features.forEach((feature) => {
+    //     if (feature !== 'service') {
+    //         pkg.devDependencies[`cli-plugin-${feature}`] = '^1.0.0';
+    //     } else {
+    //         pkg.devDependencies['cli-service'] = '^1.0.0';
+    //     }
+    // });
+
+    // await writeFileTree(targetDir, {
+    //     'package.json': JSON.stringify(pkg, null, 2),
+    // });
+
+    // 下载依赖
+    // 提前下载需要的本地cli-plugin的依赖
+    // await executeCommand(path.join(process.cwd(), name));
 
     // 根据用户选择的选项加载相应的模块，在 package.json 写入对应的依赖项
     // 并且将对应的 template 模块渲染
-
     answers.features.forEach((feature) => {
-        require(`./generator/${feature}`)(generator, answers);
+        if (feature !== 'service') {
+            require(`cli-plugin-${feature}/generator`)(generator, answers);
+        } else {
+            require(`cli-service/generator`)(generator, answers);
+        }
     });
+
+    // answers.features.forEach((feature) => {
+    //     require(`./generator/${feature}`)(generator, answers);
+    // });
 
     await generator.generate();
 
@@ -78,7 +102,7 @@ const create = async (name) => {
 
 const getPromptModules = () => {
     return ['styles', 'router', 'redux', 'linter', 'commitizen'].map((file) =>
-        require(`./promptModules/${file}`),
+        require(`cli-plugin-${file}/prompts.js`),
     );
 };
 
