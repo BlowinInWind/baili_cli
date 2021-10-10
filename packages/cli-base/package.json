@@ -11,5 +11,15 @@
     },
     "keywords": [],
     "author": "",
-    "license": "ISC"
+    "license": "ISC",
+    "dependencies": {
+        "cli-plugin-babel": "^1.0.0",
+        "cli-plugin-commitizen": "^1.0.0",
+        "cli-plugin-linter": "^1.0.0",
+        "cli-plugin-react": "^1.0.0",
+        "cli-plugin-redux": "^1.0.0",
+        "cli-plugin-router": "^1.0.0",
+        "cli-plugin-styles": "^1.0.0",
+        "cli-service": "^1.0.0"
+    }
 }
